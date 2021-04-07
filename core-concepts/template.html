@@ -1,0 +1,55 @@
+
+<!-- 31-3 Template , dynamically create HTML elements basic concepts -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <style>
+        .user{
+            background-color: chartreuse;
+            border-radius: 50%;
+            margin: 10px;
+            padding: 30px;
+            box-shadow: 5px 5px 4px chocolate;
+        }
+    </style>
+
+    <h1 style="text-align: center;">31-3 Template , dynamically create HTML elements basic concepts</h1>
+    
+    <div id="user-container">
+
+    </div>
+
+    <script>
+
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(res => res.json())
+            .then(data => showUserName(data));
+
+        function showUserName(data) {
+            // console.log(data);
+            let userHtml = '';
+            data.forEach(user => {
+                userHtml = userHtml + `<div class="user">
+                   <h1> ${user.name}</h1>
+                   <p> email: ${user.email}</p>
+                   <p>Company: ${user.company.name}.  ${user.company.catchPhrase}.  ${user.company.bs}</p>
+                    </div>`
+
+            });
+            // console.log(lists);
+            let userContainer = document.getElementById('user-container');
+            userContainer.innerHTML = userHtml;
+        }
+
+    </script>
+</body>
+
+</html>
